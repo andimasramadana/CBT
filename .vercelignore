@@ -1,0 +1,12 @@
+/vendor
+/node_modules
+/.git
+/tests
+.env
+.env.*
+phpunit.xml
+README.md
+CLAUDE.md
+AGENTS.md
+boost.json
+public/.htaccess
