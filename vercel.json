@@ -38,7 +38,8 @@
     "APP_NAME": "Rayon Cibedug 1",
     "APP_ENV": "production",
     "APP_KEY": "base64:SpSMEoXPmTKOJ6BzCcQxr2K01I52OMbnGJdTHOMIZgQ=",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
+    "LARAVEL_STORAGE_PATH": "/tmp/storage",
     "APP_CONFIG_CACHE": "/tmp/bootstrap/cache/config.php",
     "APP_EVENTS_CACHE": "/tmp/bootstrap/cache/events.php",
     "APP_PACKAGES_CACHE": "/tmp/bootstrap/cache/packages.php",
@@ -50,7 +51,7 @@
     "SESSION_DRIVER": "cookie",
     "SESSION_LIFETIME": "120",
     "QUEUE_CONNECTION": "sync",
-    "LOG_CHANNEL": "stderr",
+    "LOG_CHANNEL": "errorlog",
     "DB_CONNECTION": "sqlite",
     "DB_DATABASE": "/tmp/database.sqlite"
   }

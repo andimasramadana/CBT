@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
 define('LARAVEL_START', microtime(true));
 
@@ -23,15 +21,23 @@ foreach ($tmpDirs as $dir) {
     }
 }
 
+// Redirect storage path to /tmp/storage before Laravel boots
+putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
+$_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
+$_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
+
 // Prepare SQLite database in /tmp if sqlite connection is used
-$shouldMigrate = false;
 $dbConnection = getenv('DB_CONNECTION') ?: 'sqlite';
 $dbFile = getenv('DB_DATABASE') ?: '/tmp/database.sqlite';
 
 if ($dbConnection === 'sqlite' && $dbFile === '/tmp/database.sqlite') {
     if (! file_exists($dbFile)) {
-        touch($dbFile);
-        $shouldMigrate = true;
+        $sourceDb = dirname(__DIR__).'/database/database.sqlite';
+        if (file_exists($sourceDb) && filesize($sourceDb) > 0) {
+            copy($sourceDb, $dbFile);
+        } else {
+            touch($dbFile);
+        }
     }
 }
 
@@ -45,17 +51,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 // Bootstrap Laravel Application
 $app = require_once __DIR__.'/../bootstrap/app.php';
-
-// Run migrations and seeders once if fresh SQLite database
-if ($shouldMigrate) {
-    try {
-        $kernel = $app->make(ConsoleKernel::class);
-        $kernel->bootstrap();
-        Artisan::call('migrate', ['--force' => true, '--seed' => true]);
-    } catch (Throwable $e) {
-        // Silently continue so requests don't fail if migration encounters an issue
-    }
-}
+$app->useStoragePath('/tmp/storage');
 
 // Handle request
 $app->handleRequest(Request::capture());
