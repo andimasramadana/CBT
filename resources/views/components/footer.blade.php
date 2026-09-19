@@ -37,12 +37,6 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('achievements.index') }}">
-                            Prestasi
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="{{ route('students.index') }}">
                             Profil Siswa
                         </a>

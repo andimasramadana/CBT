@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             StudentSeeder::class,
             GallerySeeder::class,
-            AchievementSeeder::class,
         ]);
     }
 }

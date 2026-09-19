@@ -10,7 +10,12 @@
 
         <div class="student-detail-card">
             <div class="student-detail-card__avatar">
-                <i class="fa-solid fa-user"></i>
+                @if($student->photo)
+                    <img src="{{ \Illuminate\Support\Str::startsWith($student->photo, ['http://', 'https://']) ? $student->photo : asset('storage/' . $student->photo) }}" alt="Foto {{ $student->name }}" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-block';">
+                    <i class="fa-solid fa-user" style="display: none;"></i>
+                @else
+                    <i class="fa-solid fa-user"></i>
+                @endif
             </div>
 
             <h1>{{ $student->name ?? 'Nama Siswa' }}</h1>

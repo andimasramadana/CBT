@@ -9,7 +9,7 @@
         <div class="student-directory__banner-image"></div>
         <div class="container student-directory__banner-content">
             <h1><span>Direktori</span> Siswa</h1>
-            <p>Temukan dan jelajahi profil siswa SMK Wikrama Bogor</p>
+            <p>Temukan dan jelajahi profil siswa Rayon Cibedug 1</p>
         </div>
     </div>
 
@@ -64,7 +64,12 @@
                    data-rombel="{{ strtolower($student->rombel ?? '') }}"
                    data-rayon="{{ strtolower($student->rayon ?? '') }}">
                     <div class="student-profile-card__avatar">
-                        <i class="fa-solid fa-user"></i>
+                        @if($student->photo)
+                            <img src="{{ \Illuminate\Support\Str::startsWith($student->photo, ['http://', 'https://']) ? $student->photo : asset('storage/' . $student->photo) }}" alt="Foto {{ $student->name }}" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-block';">
+                            <i class="fa-solid fa-user" style="display: none;"></i>
+                        @else
+                            <i class="fa-solid fa-user"></i>
+                        @endif
                     </div>
                     <div class="student-profile-card__details">
                         <h2>{{ $student->name ?? 'Nama Siswa' }}</h2>

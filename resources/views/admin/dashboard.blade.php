@@ -61,23 +61,6 @@
 
             </div>
 
-
-            <div class="card">
-
-                <div class="card-icon">
-                    <i class="fa-solid fa-trophy"></i>
-                </div>
-
-                <h3>
-                    Prestasi
-                </h3>
-
-                <p>
-                    Kelola data prestasi siswa.
-                </p>
-
-            </div>
-
         </div>
 
     </div>

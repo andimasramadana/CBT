@@ -30,21 +30,27 @@
 
             @forelse($galleries as $gallery)
 
-                <div class="card">
+                <div class="card gallery-card">
 
-                    <div class="card-icon">
+                    @if($gallery->image)
+                        <div class="gallery-card__image">
+                            <img src="{{ \Illuminate\Support\Str::startsWith($gallery->image, ['http://', 'https://']) ? $gallery->image : asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}">
+                        </div>
+                    @else
+                        <div class="card-icon">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                    @endif
 
-                        <i class="fa-solid fa-image"></i>
+                    <div class="gallery-card__body">
+                        <h3>
+                            {{ $gallery->title ?? 'Dokumentasi Rayon' }}
+                        </h3>
 
+                        <p>
+                            {{ $gallery->description ?? 'Dokumentasi kegiatan Rayon Cibedug 1.' }}
+                        </p>
                     </div>
-
-                    <h3>
-                        {{ $gallery->title ?? 'Dokumentasi Rayon' }}
-                    </h3>
-
-                    <p>
-                        {{ $gallery->description ?? 'Dokumentasi kegiatan Rayon Cibedug 1.' }}
-                    </p>
 
                 </div>
 

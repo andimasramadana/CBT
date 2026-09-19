@@ -47,14 +47,6 @@
 
                 <li class="nav-item">
                     <a
-                        class="nav-link {{ request()->routeIs('achievements.*') ? 'active' : '' }}"
-                        href="{{ route('achievements.index') }}">
-                        Prestasi
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a
                         class="nav-link {{ request()->routeIs('students.*') ? 'active' : '' }}"
                         href="{{ route('students.index') }}">
                         Profil Siswa

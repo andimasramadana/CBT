@@ -32,7 +32,7 @@
                                 @php($profile = $studentProfiles->get($student))
                                 <span class="duty-student__avatar">
                                     @if($profile?->photo)
-                                        <img src="{{ $profile->photo }}" alt="Foto {{ $student }}">
+                                        <img src="{{ str_starts_with($profile->photo, 'http') ? $profile->photo : asset('storage/' . $profile->photo) }}" alt="Foto {{ $student }}">
                                     @else
                                         {{ strtoupper(substr($student, 0, 1)) }}
                                     @endif

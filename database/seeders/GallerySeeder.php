@@ -9,25 +9,27 @@ class GallerySeeder extends Seeder
 {
     public function run(): void
     {
+        Gallery::query()->delete();
+
         Gallery::create([
-            'title' => 'Kegiatan Rayon',
-            'description' => 'Dokumentasi kegiatan Rayon Cibedug 1.',
-            'image' => 'gallery/sample-1.jpg',
-            'category' => 'Kegiatan Rayon',
+            'title' => 'Angkatan 30',
+            'description' => 'Dokumentasi Angkatan 30',
+            'image' => 'gallery/17.jpeg',
+            'category' => 'Angkatan',
         ]);
 
         Gallery::create([
-            'title' => 'Kebersamaan Siswa',
-            'description' => 'Dokumentasi kebersamaan siswa.',
-            'image' => 'gallery/sample-2.jpg',
-            'category' => 'Kebersamaan',
+            'title' => 'Bagi Raport',
+            'description' => 'Dokumentasi Bagi Raport',
+            'image' => 'gallery/4.jpeg',
+            'category' => 'Kegiatan',
         ]);
 
         Gallery::create([
-            'title' => 'Pembelajaran',
-            'description' => 'Kegiatan pembelajaran siswa.',
-            'image' => 'gallery/sample-3.jpg',
-            'category' => 'Pembelajaran',
+            'title' => 'Piket Rayon',
+            'description' => 'Dokumentasi Piket Rayon',
+            'image' => 'gallery/2.jpeg',
+            'category' => 'Piket',
         ]);
     }
 }

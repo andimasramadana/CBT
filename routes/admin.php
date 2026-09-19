@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\StudentController;
@@ -29,9 +28,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->except(['show']);
 
         Route::resource('galleries', GalleryController::class)
-            ->except(['show']);
-
-        Route::resource('achievements', AchievementController::class)
             ->except(['show']);
     });
 });
