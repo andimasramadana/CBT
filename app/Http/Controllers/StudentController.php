@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DutySchedule;
 use App\Models\Student;
 use Carbon\Carbon;
 
@@ -29,13 +30,12 @@ class StudentController extends Controller
 
     public function dutySchedule()
     {
-        $schedule = [
-            'Senin' => ['Nesya', 'Maurida', 'Aldawiyah', 'Gilang', 'M. Ridho', 'M. Sidqi', 'Aisyh Dianda'],
-            'Selasa' => ['Alizya', 'Jihanita', 'Gibran', 'Naufal', 'Saffa Nashwa', 'Kiandra', 'Mayang'],
-            'Rabu' => ['M. Yurizki', 'Vadli Arrahman', 'Qaireen', 'A. Luthfi Nizam', 'Farrel', 'M. Luthfi', 'M. Rezky'],
-            'Kamis' => ['Fujiyani S', 'Zalva', 'Fadillah M', 'Nazry Ilyas', 'Rusya Jabr', 'M. Kairo', 'Azka'],
-            'Jumat' => ['Kalista', 'Teuku adhilla', 'M. Kadafi', 'M. Fakhri', 'Dzakwan', 'Shaffa Azzahra', 'Andimas'],
-        ];
+        $rows = DutySchedule::orderBy('order')->get();
+
+        $schedule = [];
+        foreach ($rows as $row) {
+            $schedule[$row->day] = $row->students;
+        }
 
         $today = [
             'Monday' => 'Senin',
@@ -45,11 +45,6 @@ class StudentController extends Controller
             'Friday' => 'Jumat',
         ][Carbon::now()->format('l')] ?? null;
 
-        $studentProfiles = Student::query()
-            ->whereIn('name', collect($schedule)->flatten()->all())
-            ->get()
-            ->keyBy('name');
-
-        return view('duty-schedule.index', compact('schedule', 'today', 'studentProfiles'));
+        return view('duty-schedule.index', compact('schedule', 'today'));
     }
 }

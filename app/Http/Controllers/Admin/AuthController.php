@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,14 +24,29 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
+        $loginValue = $credentials['login'];
+
+        // Try admin login first (by email or name)
         $user = User::query()
-            ->where('email', $credentials['login'])
-            ->orWhere('name', $credentials['login'])
+            ->where('is_admin', true)
+            ->where(function ($query) use ($loginValue) {
+                $query->where('email', $loginValue)
+                    ->orWhere('name', $loginValue);
+            })
             ->first();
+
+        // If not admin, try student login by NIS
+        if (! $user) {
+            $student = Student::where('nis', $loginValue)->first();
+
+            if ($student && $student->user_id) {
+                $user = User::find($student->user_id);
+            }
+        }
 
         if (! $user || ! password_verify($credentials['password'], $user->password)) {
             return back()
-                ->withErrors(['login' => 'Username/email atau password salah.'])
+                ->withErrors(['login' => 'NIS atau password salah. Pastikan menggunakan NIS sebagai username dan password.'])
                 ->onlyInput('login');
         }
 
@@ -38,7 +54,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(
-            $user->is_admin ? route('admin.dashboard') : route('profile.edit')
+            $user->is_admin ? route('admin.dashboard') : route('home')
         );
     }
 

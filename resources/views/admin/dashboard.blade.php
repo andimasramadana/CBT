@@ -45,21 +45,21 @@
             </a>
 
 
-            <div class="card">
+            <a href="{{ route('admin.duty-schedule.index') }}" class="card">
 
                 <div class="card-icon">
-                    <i class="fa-solid fa-images"></i>
+                    <i class="fa-solid fa-calendar-check"></i>
                 </div>
 
                 <h3>
-                    Galeri
+                    Jadwal Piket
                 </h3>
 
                 <p>
-                    Kelola dokumentasi kegiatan rayon.
+                    Kelola jadwal piket rayon harian.
                 </p>
 
-            </div>
+            </a>
 
         </div>
 

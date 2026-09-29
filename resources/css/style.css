@@ -1077,3 +1077,568 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================
+   ORG HERO
+   ========================= */
+
+.org-hero {
+    padding: 80px 0 60px;
+
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(22, 131, 232, 0.22),
+            transparent 45%
+        ),
+        linear-gradient(
+            150deg,
+            #061d3b 0%,
+            #0b4f9c 60%,
+            #1683e8 100%
+        );
+
+    color: white;
+    text-align: center;
+}
+
+.org-hero__inner {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.org-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 20px;
+    padding: 8px 16px;
+
+    color: #dff1ff;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.org-hero__title {
+    margin-bottom: 14px;
+
+    color: white;
+
+    font-size: clamp(34px, 5vw, 54px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+}
+
+.org-hero__title span {
+    display: block;
+    color: #72c4ff;
+}
+
+.org-hero__sub {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 15px;
+}
+
+/* =========================
+   ORG CHART LAYOUT
+   ========================= */
+
+.org-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-bottom: 40px;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    position: relative;
+    width: 100%;
+}
+
+.org-level--duo {
+    gap: 28px;
+    position: relative;
+}
+
+/* =========================
+   ORG CONNECTOR (vertical line)
+   ========================= */
+
+.org-connector {
+    width: 2px;
+    height: 36px;
+    flex-shrink: 0;
+
+    background: linear-gradient(
+        to bottom,
+        var(--secondary),
+        var(--primary)
+    );
+
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+/* =========================
+   ORG BRIDGE (horizontal bar)
+   ========================= */
+
+.org-bridge {
+    position: absolute;
+    top: -36px;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        var(--secondary),
+        var(--primary)
+    );
+    opacity: 0.55;
+    border-radius: 2px;
+}
+
+.org-bridge--duo {
+    left: calc(25% + 16px);
+    right: calc(25% + 16px);
+}
+
+.org-bridge--wide {
+    left: 10%;
+    right: 10%;
+}
+
+.org-sections-wrap {
+    position: relative;
+    width: 100%;
+}
+
+/* =========================
+   ORG NODE (leadership cards)
+   ========================= */
+
+.org-node {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 300px;
+    padding: 22px 26px;
+
+    background: white;
+
+    border: 1.5px solid var(--border);
+    border-radius: 22px;
+
+    box-shadow: var(--shadow-sm);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+    position: relative;
+    z-index: 2;
+}
+
+.org-node:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.org-node__icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+    color: white;
+}
+
+.org-node__body {
+    text-align: left;
+}
+
+.org-node__role {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.org-node__name {
+    color: var(--dark);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.org-node__list {
+    margin: 6px 0 0 18px;
+    padding: 0;
+
+    color: var(--text);
+
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* ── Node colour variants ── */
+
+.org-node--primary .org-node__icon {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    box-shadow: 0 8px 20px rgba(11, 79, 156, 0.3);
+}
+
+.org-node--primary .org-node__role {
+    color: var(--primary);
+}
+
+.org-node--primary {
+    border-color: #c5deff;
+}
+
+.org-node--accent .org-node__icon {
+    background: linear-gradient(135deg, #0f6fbf, var(--accent));
+    box-shadow: 0 8px 20px rgba(34, 166, 242, 0.3);
+}
+
+.org-node--accent .org-node__role {
+    color: #1683e8;
+}
+
+.org-node--accent {
+    border-color: #c2e7ff;
+}
+
+.org-node--gold .org-node__icon {
+    background: linear-gradient(135deg, #b8740a, #f5a623);
+    box-shadow: 0 8px 20px rgba(245, 166, 35, 0.35);
+}
+
+.org-node--gold .org-node__role {
+    color: #b8740a;
+}
+
+.org-node--gold {
+    border-color: #fde8b0;
+    background: #fffdf5;
+}
+
+.org-node--teal .org-node__icon {
+    background: linear-gradient(135deg, #0e7c6e, #1cb89f);
+    box-shadow: 0 8px 20px rgba(28, 184, 159, 0.3);
+}
+
+.org-node--teal .org-node__role {
+    color: #0e7c6e;
+}
+
+.org-node--teal {
+    border-color: #b2f0e6;
+    background: #f4fdfb;
+}
+
+.org-node--purple .org-node__icon {
+    background: linear-gradient(135deg, #5b21b6, #8b5cf6);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+.org-node--purple .org-node__role {
+    color: #6d28d9;
+}
+
+.org-node--purple {
+    border-color: #ddd6fe;
+    background: #faf5ff;
+}
+
+.org-node--rose .org-node__icon {
+    background: linear-gradient(135deg, #be185d, #ec4899);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+}
+
+.org-node--rose .org-node__role {
+    color: #be185d;
+}
+
+.org-node--rose {
+    border-color: #fecdd3;
+    background: #fff1f6;
+}
+
+/* =========================
+   ORG SECTIONS GRID
+   ========================= */
+
+.org-sections {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+
+    margin-top: 36px;
+    padding-top: 4px;
+}
+
+.org-section-card {
+    border-radius: 20px;
+    padding: 22px;
+
+    background: white;
+
+    border: 1.5px solid var(--border);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.org-section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.org-section-card__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--border);
+}
+
+.org-section-card__icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 18px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.org-section-card__header h3 {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.org-section-card__sub {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+.org-section-card__list {
+    margin: 0 0 0 18px;
+    padding: 0;
+    font-size: 12.5px;
+    line-height: 2;
+    color: var(--text);
+    list-style: decimal;
+}
+
+.org-section-card__group {
+    margin-bottom: 12px;
+}
+
+.org-section-card__group:last-child {
+    margin-bottom: 0;
+}
+
+.org-section-card__group-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+    opacity: 0.75;
+}
+
+/* ── Section card colour variants ── */
+
+.org-section-card--green {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+}
+
+.org-section-card--green .org-section-card__icon {
+    background: linear-gradient(135deg, #15803d, #22c55e);
+    box-shadow: 0 6px 16px rgba(34, 197, 94, 0.3);
+}
+
+.org-section-card--green .org-section-card__header h3 {
+    color: #15803d;
+}
+
+.org-section-card--green .org-section-card__sub {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.org-section-card--green .org-section-card__group-label {
+    color: #15803d;
+}
+
+.org-section-card--blue {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+}
+
+.org-section-card--blue .org-section-card__icon {
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.org-section-card--blue .org-section-card__header h3 {
+    color: #1d4ed8;
+}
+
+.org-section-card--blue .org-section-card__sub {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.org-section-card--blue .org-section-card__group-label {
+    color: #1d4ed8;
+}
+
+.org-section-card--violet {
+    border-color: #ddd6fe;
+    background: #faf5ff;
+}
+
+.org-section-card--violet .org-section-card__icon {
+    background: linear-gradient(135deg, #5b21b6, #8b5cf6);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+}
+
+.org-section-card--violet .org-section-card__header h3 {
+    color: #5b21b6;
+}
+
+.org-section-card--violet .org-section-card__sub {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.org-section-card--violet .org-section-card__group-label {
+    color: #5b21b6;
+}
+
+.org-section-card--amber {
+    border-color: #fde68a;
+    background: #fffbeb;
+}
+
+.org-section-card--amber .org-section-card__icon {
+    background: linear-gradient(135deg, #92400e, #f59e0b);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+}
+
+.org-section-card--amber .org-section-card__header h3 {
+    color: #92400e;
+}
+
+.org-section-card--amber .org-section-card__sub {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.org-section-card--amber .org-section-card__group-label {
+    color: #92400e;
+}
+
+.org-section-card--cyan {
+    border-color: #a5f3fc;
+    background: #ecfeff;
+}
+
+.org-section-card--cyan .org-section-card__icon {
+    background: linear-gradient(135deg, #0e7490, #06b6d4);
+    box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);
+}
+
+.org-section-card--cyan .org-section-card__header h3 {
+    color: #0e7490;
+}
+
+.org-section-card--cyan .org-section-card__sub {
+    background: #cffafe;
+    color: #0e7490;
+}
+
+.org-section-card--cyan .org-section-card__group-label {
+    color: #0e7490;
+}
+
+/* =========================
+   ORG RESPONSIVE
+   ========================= */
+
+@media (max-width: 1100px) {
+    .org-sections {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .org-bridge--wide {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .org-node {
+        min-width: unset;
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .org-level--duo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .org-bridge--duo {
+        display: none;
+    }
+
+    .org-sections {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .org-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .org-hero__title {
+        letter-spacing: -1px;
+    }
+}

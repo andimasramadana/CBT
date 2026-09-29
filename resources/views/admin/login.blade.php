@@ -1,106 +1,88 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Rayon Cibedug 1')
+@section('title', 'Login - Rayon Cibedug 1')
 
 @section('content')
 
-<section class="section">
-
-    <div class="container">
-
-        <div style="
-            max-width: 450px;
-            margin: auto;
-        ">
-
-            <div class="section-header">
-
-                <div class="section-label">
-                    Administrator
-                </div>
-
-                <h1 class="section-title">
-                    Login Admin
-                </h1>
-
-                <p class="section-description">
-                    Masuk untuk mengelola data
-                    Rayon Cibedug 1.
-                </p>
-
+<section class="login-page">
+    <div class="login-wrapper">
+        <div class="login-form-panel">
+            <div class="login-form-header">
+                <h2>Masuk untuk memulai Rayon Cibedug 1</h2>
             </div>
 
+            @if($errors->any())
+                <div class="login-error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    {{ $errors->first('login') }}
+                </div>
+            @endif
 
-            <div class="card">
+            <form method="POST" action="{{ route('admin.login.process') }}" class="login-form">
+                @csrf
 
-                <form method="POST"
-                      action="{{ route('admin.login.process') }}">
-
-                    @csrf
-
-                    <div style="margin-bottom: 20px;">
-
-                        <label>
-                            Email atau username
-                        </label>
-
+                <div class="login-field">
+                    <label for="login-username">Username atau NIS</label>
+                    <div class="login-input-wrap">
                         <input
+                            id="login-username"
                             type="text"
                             name="login"
-                            placeholder="admin atau email@example.com"
-                            style="
-                                width: 100%;
-                                padding: 13px;
-                                margin-top: 8px;
-                                border: 1px solid #e2e8f0;
-                                border-radius: 10px;
-                            "
+                            value="{{ old('login') }}"
+                            placeholder="Masukkan username atau NIS"
+                            autocomplete="username"
+                            required
+                            autofocus
                         >
-
                     </div>
+                </div>
 
-
-                    <div style="margin-bottom: 20px;">
-
-                        <label>
-                            Password
-                        </label>
-
+                <div class="login-field">
+                    <label for="login-password">Password</label>
+                    <div class="login-input-wrap">
                         <input
+                            id="login-password"
                             type="password"
                             name="password"
-                            placeholder="Password"
-                            style="
-                                width: 100%;
-                                padding: 13px;
-                                margin-top: 8px;
-                                border: 1px solid #e2e8f0;
-                                border-radius: 10px;
-                            "
+                            placeholder="Masukkan password"
+                            autocomplete="current-password"
+                            required
                         >
-
+                        <button type="button" class="login-toggle-pw" onclick="togglePassword()" title="Tampilkan password">
+                            <i class="fa-solid fa-eye" id="pw-toggle-icon"></i>
+                        </button>
                     </div>
+                </div>
 
+                <button type="submit" class="login-submit-btn">Masuk</button>
+            </form>
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        style="width: 100%; border: none; cursor: pointer;">
-
-                        <i class="fa-solid fa-right-to-bracket"></i>
-
-                        Masuk ke Admin
-
-                    </button>
-
-                </form>
-
-            </div>
-
+            <p class="login-help">Lupa password? Hubungi pembimbing rayon.</p>
         </div>
-
     </div>
 
+    <a href="{{ route('students') }}" class="login-explore-button">
+        <i class="fa-solid fa-compass"></i>
+        Jelajahi siswa
+    </a>
+
 </section>
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById('login-password');
+        const icon = document.getElementById('pw-toggle-icon');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
 
 @endsection

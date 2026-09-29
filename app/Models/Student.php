@@ -16,6 +16,7 @@ class Student extends Model
         'photo',
         'rombel',
         'rayon',
+        'kelas',
         'skills',
         'interests',
         'bio',

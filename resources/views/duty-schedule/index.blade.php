@@ -10,9 +10,13 @@
             <h1>Jadwal Piket <span>Rayon</span></h1>
             <p>Jadwal piket siswa yang bertugas setiap hari.</p>
             @if($today)
-                <div class="duty-schedule-page__today"><i class="fa-solid fa-sun"></i> Hari ini: <strong>{{ $today }}</strong></div>
+                <div class="duty-schedule-page__today">
+                    <i class="fa-solid fa-sun"></i> Hari ini: <strong>{{ $today }}</strong>
+                </div>
             @else
-                <div class="duty-schedule-page__today"><i class="fa-solid fa-moon"></i> Akhir pekan: tidak ada jadwal piket</div>
+                <div class="duty-schedule-page__today">
+                    <i class="fa-solid fa-moon"></i> Akhir pekan: tidak ada jadwal piket
+                </div>
             @endif
         </div>
 
@@ -29,18 +33,10 @@
                     <div class="duty-day-card__students">
                         @foreach($students as $student)
                             <div class="duty-student {{ $today === $day ? 'is-on-duty' : '' }}">
-                                @php($profile = $studentProfiles->get($student))
                                 <span class="duty-student__avatar">
-                                    @if($profile?->photo)
-                                        <img src="{{ str_starts_with($profile->photo, 'http') ? $profile->photo : asset('storage/' . $profile->photo) }}" alt="Foto {{ $student }}">
-                                    @else
-                                        {{ strtoupper(substr($student, 0, 1)) }}
-                                    @endif
+                                    {{ strtoupper(substr($student, 0, 1)) }}
                                 </span>
-                                <span>{{ $student }}</span>
-                                @if($today === $day)
-                                    <i class="fa-solid fa-circle-check"></i>
-                                @endif
+                                <span class="duty-student__name">{{ $student }}</span>
                             </div>
                         @endforeach
                     </div>

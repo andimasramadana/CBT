@@ -43,17 +43,19 @@
 
                 <a href="{{ route('home') }}"
                    class="{{ request()->routeIs('home') ? 'active' : '' }}">
-                    Home
+                    Beranda
                 </a>
 
-                <a href="{{ route('gallery') }}"
-                   class="{{ request()->routeIs('gallery') ? 'active' : '' }}">
-                    Galeri
+                
+
+                <a href="{{ route('struktur') }}"
+                   class="{{ request()->routeIs('struktur') ? 'active' : '' }}">
+                    Struktur
                 </a>
 
                 <a href="{{ route('students') }}"
                    class="{{ request()->routeIs('students') ? 'active' : '' }}">
-                    Siswa
+                    Murid
                 </a>
 
                 <a href="{{ route('duty-schedule') }}"
@@ -62,14 +64,21 @@
                 </a>
 
                 @auth
-                    <a href="{{ route('profile.edit') }}" class="admin-button user-profile-link">
-                        @if(auth()->user()->profile_photo)
-                            <img src="{{ asset('storage/'.auth()->user()->profile_photo) }}" alt="Foto {{ auth()->user()->name }}">
-                        @else
-                            <i class="fa-solid fa-user"></i>
-                        @endif
-                        {{ auth()->user()->name }}
-                    </a>
+                    @if(auth()->user()->is_admin)
+                        <a href="{{ route('profile.edit') }}" class="admin-button user-profile-link admin-profile-badge-btn" title="Panel & Profil Administrator">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Admin (Kelola Siswa)</span>
+                        </a>
+                    @else
+                        <a href="{{ route('profile.edit') }}" class="admin-button user-profile-link">
+                            @if(auth()->user()->profile_photo)
+                                <img src="{{ asset('storage/'.auth()->user()->profile_photo) }}" alt="Foto {{ auth()->user()->name }}">
+                            @else
+                                <i class="fa-solid fa-user"></i>
+                            @endif
+                            {{ auth()->user()->name }}
+                        </a>
+                    @endif
                     <form method="POST" action="{{ route('admin.logout') }}" class="logout-form">
                         @csrf
                         <button type="submit" class="logout-button">
@@ -177,3 +186,4 @@
 
 </body>
 </html>
+
